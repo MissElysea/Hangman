@@ -259,3 +259,29 @@ const canvasCreator = () => {
 
   return { initialDrawing, head, body, leftArm, rightArm, leftLeg, rightLeg };
 };
+
+// Draw the man
+
+const drawMan = (count) => {
+  let { head, body, leftArm, rightArm, leftLeg, rightLeg } = canvasCreator();
+
+  if (count === 1) {
+    head();
+  } else if (count === 2) {
+    body();
+  } else if (count === 3) {
+    leftArm();
+  } else if (count === 4) {
+    rightArm();
+  } else if (count === 5) {
+    leftLeg();
+  } else if (count === 6) {
+    rightLeg();
+  }
+}; 
+
+// New Game
+
+newGameButton.addEventListener("click", initializer);
+window.onload = initializer;
+
