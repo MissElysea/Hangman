@@ -103,3 +103,99 @@ let displayItem = chosenWord.replace(/./g, '<span class="dashes">_</span>');
 
 playerSelectionSection.innerHTML = displayItem;
 };
+//Initial Function (Called when page loads/user presses new game)
+
+const initializer = () => {
+  winCount = 0;
+  count = 0;
+
+//Initially erase all content and hide letteres and new game button
+
+  playerSelectionSection.innerHTML = "";
+  optionsContainer.innerHTML = "";
+  letterContainer.classList.add("hide");
+  newGameContainer.classList.add("hide");
+  letterContainer.innerHTML = "";
+
+//For creating letter buttons
+
+  for (let i = 65; i < 91; i++) {
+    let button = document.createElement("button");
+    button.classList.add("letters");
+
+//Number to ASCII[A-Z]
+
+    button.innerText = String.fromCharCode(i);
+
+//character button click
+
+    button.addEventListener("click", () => {
+      let charArray = chosenWord.split("");
+      let dashes = document.getElementsByClassName("dashes");
+
+//if array contains clciked value replace the matched dash with letter else dram on canvas
+
+      if (charArray.includes(button.innerText)) {
+        charArray.forEach((char, index) => {
+
+//if character in array is same as clicked button
+
+          if (char === button.innerText) {
+
+//replace dash with letter
+
+            dashes[index].innerText = char;
+
+//increment counter
+
+            winCount += 1;
+
+//if winCount equals word length
+
+            if (winCount == charArray.length) {
+              resultText.innerHTML = `<h2 class='win-msg'>Go head' QUEEN!</h2><p>You guessed it. The word was <span>${chosenWord}</span></p>`;
+              resultText.style.textAlign = 'center';
+
+//block all buttons
+
+              blocker();
+            }
+          }
+        });
+      } else {
+        
+//lose count
+
+        count += 1;
+
+//for drawing man
+
+        drawMan(count);
+
+//Count==6 because head,body,left arm, right arm,left leg,right leg
+
+        if (count == 6) {
+          resultText.innerHTML = `<h2 class='lose-msg'>Better Luck Next Time!</h2><p>The correct word was <span>${chosenWord}</span></p>`;
+          resultText.style.textAlign = 'center';
+          blocker();
+        }
+      }
+
+//disable clicked button
+
+      button.disabled = true;
+    });
+    letterContainer.append(button);
+  }
+
+  displayOptions();
+
+//Call to canvasCreator (for clearing previous canvas and creating initial canvas)
+
+  let { initialDrawing } = canvasCreator();
+
+//initialDrawing would draw the frame
+
+  initialDrawing();
+};
+
