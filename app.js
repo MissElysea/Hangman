@@ -50,19 +50,19 @@ const displayOptions = () => {
   optionsContainer.appendChild(buttonCon);
 };
 
-//Block all the Buttons
+// Block all the Buttons
 
 const blocker = () => {
   let optionsButtons = document.querySelectorAll(".options");
   let letterButtons = document.querySelectorAll(".letters");
 
-  //disable all options
+// Disable all options
 
   optionsButtons.forEach((button) => {
     button.disabled = true;
   });
 
-  //disable all letters
+// Disable all letters
 
   letterButtons.forEach((button) => {
     button.disabled.true;
@@ -75,7 +75,7 @@ const blocker = () => {
 const generateWord = (optionValue) => {
   let optionsButtons = document.querySelectorAll(".options");
 
-  //If optionValur matches the button innerText then highlight the button
+// If optionValue matches the button innerText then highlight the button
 
   optionsButtons.forEach((button) => {
     if (button.innerText.toLowerCase() === optionValue) {
@@ -95,11 +95,11 @@ let optionArray = options[optionValue];
 chosenWord = optionArray[Math.floor(Math.random() * optionArray.length)];
 chosenWord = chosenWord.toUpperCase();
 
-//replace every letter with span containing dash
+// Replace every letter with span containing dash
 
 let displayItem = chosenWord.replace(/./g, '<span class="dashes">_</span>');
 
-//Display each element as span
+// Display each element as span
 
 playerSelectionSection.innerHTML = displayItem;
 };
@@ -109,7 +109,7 @@ const initializer = () => {
   winCount = 0;
   count = 0;
 
-//Initially erase all content and hide letteres and new game button
+// Initially erase all content and hide letteres and new game button
 
   playerSelectionSection.innerHTML = "";
   optionsContainer.innerHTML = "";
@@ -117,46 +117,46 @@ const initializer = () => {
   newGameContainer.classList.add("hide");
   letterContainer.innerHTML = "";
 
-//For creating letter buttons
+// For creating letter buttons
 
   for (let i = 65; i < 91; i++) {
     let button = document.createElement("button");
     button.classList.add("letters");
 
-//Number to ASCII[A-Z]
+// Number to ASCII[A-Z]
 
     button.innerText = String.fromCharCode(i);
 
-//character button click
+// Character button click
 
     button.addEventListener("click", () => {
       let charArray = chosenWord.split("");
       let dashes = document.getElementsByClassName("dashes");
 
-//if array contains clciked value replace the matched dash with letter else dram on canvas
+// If array contains clciked value replace the matched dash with letter else dram on canvas
 
       if (charArray.includes(button.innerText)) {
         charArray.forEach((char, index) => {
 
-//if character in array is same as clicked button
+// If character in array is same as clicked button
 
           if (char === button.innerText) {
 
-//replace dash with letter
+// Replace dash with letter
 
             dashes[index].innerText = char;
 
-//increment counter
+// Increment counter
 
             winCount += 1;
 
-//if winCount equals word length
+// If winCount equals word length
 
             if (winCount == charArray.length) {
               resultText.innerHTML = `<h2 class='win-msg'>Go head' QUEEN!</h2><p>You guessed it. The word was <span>${chosenWord}</span></p>`;
               resultText.style.textAlign = 'center';
 
-//block all buttons
+// Block all buttons
 
               blocker();
             }
@@ -164,15 +164,15 @@ const initializer = () => {
         });
       } else {
         
-//lose count
+// Lose count
 
         count += 1;
 
-//for drawing man
+// For drawing man
 
         drawMan(count);
 
-//Count==6 because head,body,left arm, right arm,left leg,right leg
+// Count==6 because head,body,left arm, right arm,left leg,right leg
 
         if (count == 6) {
           resultText.innerHTML = `<h2 class='lose-msg'>Better Luck Next Time!</h2><p>The correct word was <span>${chosenWord}</span></p>`;
@@ -181,7 +181,7 @@ const initializer = () => {
         }
       }
 
-//disable clicked button
+// Disable clicked button
 
       button.disabled = true;
     });
@@ -190,12 +190,72 @@ const initializer = () => {
 
   displayOptions();
 
-//Call to canvasCreator (for clearing previous canvas and creating initial canvas)
+// Call to canvasCreator (for clearing previous canvas and creating initial canvas)
 
   let { initialDrawing } = canvasCreator();
 
-//initialDrawing would draw the frame
+// initialDrawing would draw the frame
 
   initialDrawing();
 };
 
+// Canvas
+
+const canvasCreator = () => {
+  let context = canvas.getContext("2d");
+  context.beginPath();
+  context.strokeStyle = "#000";
+  context.lineWidth = 2;
+
+// For drawing lines
+
+  const drawLine = (fromX, fromY, toX, toY) => {
+    context.moveTo(fromX, fromY);
+    context.lineTo(toX, toY);
+    context.stroke();
+  };
+
+  const head = () => {
+    context.beginPath();
+    context.arc(70, 30, 10, 0, Math.PI * 2, true);
+    context.stroke();
+  };
+
+  const body = () => {
+    drawLine(70, 40, 70, 80);
+  };
+
+  const leftArm = () => {
+    drawLine(70, 50, 50, 70);
+  };
+
+  const rightArm = () => {
+    drawLine(70, 50, 90, 70);
+  };
+
+  const leftLeg = () => {
+    drawLine(70, 80, 50, 110);
+  };
+
+  const rightLeg = () => {
+    drawLine(70, 80, 90, 110);
+  };
+
+// Initial frame
+
+  const initialDrawing = () => {
+
+// Clear canvas
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+    //bottom line
+    drawLine(10, 130, 130, 130);
+    //left line
+    drawLine(10, 10, 10, 131);
+    //top line
+    drawLine(10, 10, 70, 10);
+    //small top line
+    drawLine(70, 10, 70, 20);
+  };
+
+  return { initialDrawing, head, body, leftArm, rightArm, leftLeg, rightLeg };
+};
