@@ -153,7 +153,7 @@ const initializer = () => {
 // If winCount equals word length
 
             if (winCount == charArray.length) {
-              resultText.innerHTML = `<h2 class='win-msg'>Go head' QUEEN!</h2><p>You guessed it. The word was <span>${chosenWord}</span></p>`;
+              resultText.innerHTML = `<h2 class='win-msg'>Go head'!</h2><p>You guessed it. The word was <span>${chosenWord}</span></p>`;
               resultText.style.textAlign = 'center';
 
 // Block all buttons
