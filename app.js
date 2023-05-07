@@ -65,10 +65,21 @@ const blocker = () => {
 // Disable all letters
 
   letterButtons.forEach((button) => {
-    button.disabled.true;
+    button.disabled = true;
   });
   newGameContainer.classList.remove("hide");
-};
+
+  if (winCount === chosenWord.length) {
+    setTimeout(() => {
+      document.getElementById("success-audio").play();
+    }, 0);
+  } else if (count === 6) {
+    setTimeout(() => {
+      document.getElementById("lose-audio").play();
+    }, 0);
+  }
+
+  };
 
 // Word Generator
 
@@ -129,8 +140,10 @@ const initializer = () => {
 
 // Character button click
 
+    let charArray = [];
+
     button.addEventListener("click", () => {
-      let charArray = chosenWord.split("");
+      charArray = chosenWord.split("");
       let dashes = document.getElementsByClassName("dashes");
 
 // If array contains clciked value replace the matched dash with letter else dram on canvas
@@ -284,4 +297,10 @@ const drawMan = (count) => {
 
 newGameButton.addEventListener("click", initializer);
 window.onload = initializer;
-
+   
+newGameButton.addEventListener("click", () => {
+  // Pause the audio if it's currently playing
+  document.getElementById("success-audio").pause();
+  document.getElementById("lose-audio").pause();
+  initializer();
+});
