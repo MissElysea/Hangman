@@ -29,7 +29,7 @@ let options = {
     "KFC",
     "Popeyes",
     "Chipotle",
-    "Wendys",
+    "Arbys",
   ],
 };
 
