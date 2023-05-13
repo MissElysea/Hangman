@@ -50,19 +50,19 @@ const displayOptions = () => {
   optionsContainer.appendChild(buttonCon);
 };
 
-// Block all the Buttons
+// Block All The Buttons
 
 const blocker = () => {
   let optionsButtons = document.querySelectorAll(".options");
   let letterButtons = document.querySelectorAll(".letters");
 
-// Disable all options
+// Disable All Options
 
   optionsButtons.forEach((button) => {
     button.disabled = true;
   });
 
-// Disable all letters
+// Disable All Letters
 
   letterButtons.forEach((button) => {
     button.disabled = true;
@@ -86,7 +86,7 @@ const blocker = () => {
 const generateWord = (optionValue) => {
   let optionsButtons = document.querySelectorAll(".options");
 
-// If optionValue matches the button innerText then highlight the button
+// If optionValue matches the button innerText The Button Will Be Highlighted
 
   optionsButtons.forEach((button) => {
     if (button.innerText.toLowerCase() === optionValue) {
@@ -114,6 +114,7 @@ let displayItem = chosenWord.replace(/./g, '<span class="dashes">_</span>');
 
 playerSelectionSection.innerHTML = displayItem;
 };
+
 //Initial Function (Called when page loads/user presses new game)
 
 const initializer = () => {
@@ -128,7 +129,7 @@ const initializer = () => {
   newGameContainer.classList.add("hide");
   letterContainer.innerHTML = "";
 
-// For creating letter buttons
+  // For creating letter buttons
 
   for (let i = 65; i < 91; i++) {
     let button = document.createElement("button");
@@ -203,11 +204,11 @@ const initializer = () => {
 
   displayOptions();
 
-// Call to canvasCreator (for clearing previous canvas and creating initial canvas)
+// Call canvasCreator (for clearing previous canvas and creating initial canvas)
 
   let { initialDrawing } = canvasCreator();
 
-// initialDrawing would draw the frame
+// To Draw The Frame
 
   initialDrawing();
 };
@@ -220,7 +221,7 @@ const canvasCreator = () => {
   context.strokeStyle = "#000";
   context.lineWidth = 2;
 
-// For drawing lines
+// For Drawing The Lines
 
   const drawLine = (fromX, fromY, toX, toY) => {
     context.moveTo(fromX, fromY);
@@ -254,26 +255,27 @@ const canvasCreator = () => {
     drawLine(70, 80, 90, 110);
   };
 
-// Initial frame
+// Initial Frame
 
   const initialDrawing = () => {
 
-// Clear canvas
+// To Clear The Canvas
+
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    //bottom line
+    // bottom line
     drawLine(10, 130, 130, 130);
-    //left line
+    // left line
     drawLine(10, 10, 10, 131);
-    //top line
+    // top line
     drawLine(10, 10, 70, 10);
-    //small top line
+    // small top line
     drawLine(70, 10, 70, 20);
   };
 
   return { initialDrawing, head, body, leftArm, rightArm, leftLeg, rightLeg };
 };
 
-// Draw the man
+// To Draw The Hangman
 
 const drawMan = (count) => {
   let { head, body, leftArm, rightArm, leftLeg, rightLeg } = canvasCreator();
@@ -299,7 +301,9 @@ newGameButton.addEventListener("click", initializer);
 window.onload = initializer;
    
 newGameButton.addEventListener("click", () => {
-  // Pause the audio if it's currently playing
+
+  // Pause The Audio
+
   document.getElementById("success-audio").pause();
   document.getElementById("lose-audio").pause();
   initializer();
