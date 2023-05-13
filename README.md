@@ -1,3 +1,8 @@
+Link To Wireframe 
+
+https://replit.com/@MissElysea/Project-1-Wireframe#
+
+
 1. Used to determine the count.
   
   Set winnerCount to 0
@@ -23,4 +28,7 @@
 4. drawHangMan takes 'count' as an argument and is responsible for drawing the different parts of hangman as the player makes incorrect guesses.
 
   If count is set to either 1-6 it will draw the different parts of the hangman.
+
+Link To Project
   
+https://misselysea.github.io/Unit-1-Project/
