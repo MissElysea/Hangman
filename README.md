@@ -2,7 +2,7 @@
 
 Link to wireframe: https://replit.com/@MissElysea/Project-1-Wireframe#
 <br>
-Link to live project: https://misselysea.github.io/Unit-1-Project/
+Link to live project: https://misselysea.github.io/Hangman/
 
 ## Game Objective
 
