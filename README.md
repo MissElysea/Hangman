@@ -1,6 +1,6 @@
 ## This project aims to provide an engaging and user-friendly word-guessing game. Below, you will find a detailed explanation of the key functionalities and the aesthetics we have implemented for an enhanced user experience.
 
-Link to Wireframe: https://replit.com/@MissElysea/Project-1-Wireframe#
+Link to wireframe: https://replit.com/@MissElysea/Project-1-Wireframe#
 <br>
 Link to live project: https://misselysea.github.io/Unit-1-Project/
 
